@@ -1,0 +1,11 @@
+things that should be mentioned in the ET paper.
+
+## Raspberry Pi 
+- how to combine the power of Kali Linux with the portability and low cost of a Raspberry Pi.
+- used the portability of the Raspberry Pi to test security assessment covertly at different locations, and have configured the Raspberry Pi to be managed remotely with little footprint.
+
+##LAF:
+paper: A passive user-side solution for evil twin access point detection at public hotspots
+- An evil twin is a kind of rogue APs. [...]
+- 4.4 | Comparisons with other work
+- takich testów jak oni nie przeprowadzimy :C
