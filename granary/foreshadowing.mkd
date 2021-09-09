@@ -21,6 +21,12 @@ paper: A passive user-side solution for evil twin access point detection at publ
 - Kali Linux - Assuring Security by Penetration Testing , Packt Publishing (by Tedi Heriyanto, Lee Allen, and Shakeel Ali)
 
 ## Turning WiFi interface to monitor mode
+WPA/WPA2 supports many types of authentication beyond pre-shared keys. aircrack-ng can ONLY crack pre-shared keys. So make sure airodump-ng shows the network as having the authentication type of PSK, otherwise, don't bother trying to crack it.
+
+Remember that just because you can receive packets from them does not mean you may will be able to transmit packets to them. The wireless card strength is typically less then the AP strength. So you have to be physically close enough for your transmitted packets to reach and be received by both the AP and the wireless client. You can confirm that you can communicate with the specific AP by following these instructions.
+
+napisać o EAPoL, taki filtr należy zastosować w wiresharku
+
 ```
 $ sudo ip link set IFACE down
 $ sudo iw IFACE set monitor control
@@ -33,7 +39,9 @@ stare - TP-LINK mają chipset **Qualcomm Atheros Communications AR9271 802.11n**
 nowe - TP-LINK mają chipset **TP-Link TL-WN722N v2/v3 Realtek RTL8188EUS** i driver rtl8188eu, który nie ma możliwości włączenia *monitor mode* i karta może być używana wyłacznie w *managed mode*.
 
 
-## Password Cracking
+## WPA/WPA2 Password Cracking
+napisać o WPA - mendeley artykuł
+http://lastbit.com/pswcalc.asp - czas potrzebny na crunchowanie hasła
 ```
 crunch [min char] [max char] {char set] | aircrack-ng -e [SSID Name] -w -/[location & name to store the capture]
 Crunch 8 8 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQR STUVWXYZ0123456789 | aircrack-ng -e PENTEST_NET -w - rootDesktop/WPA_Crack-01.cap
