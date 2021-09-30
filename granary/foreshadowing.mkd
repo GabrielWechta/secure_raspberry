@@ -47,3 +47,10 @@ crunch [min char] [max char] {char set] | aircrack-ng -e [SSID Name] -w -/[locat
 Crunch 8 8 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQR STUVWXYZ0123456789 | aircrack-ng -e PENTEST_NET -w - rootDesktop/WPA_Crack-01.cap
 ```
 Osiąga temperatury ~85C. ~250 słów/sekunde, przy ~50C. ~300 słów/sekunde
+
+## Save file transfer
+python script on 182 page of Second Edition
+
+## Site Cloning i DNS chef i SEToolkit (mega!)
+wiele do sprawdzenia, udaje się przechwytać ruch strony, hasło i login na przykład dla linuxquestion
+Trzeba się jeszcze nauczyć o dns poisoning!
