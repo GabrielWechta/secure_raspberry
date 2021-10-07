@@ -6,6 +6,11 @@ things that should be mentioned in the ET paper.
 
 ## Raspberry Pi - 2nd Edition 
 - There are very popular options out there such as, Arduino, Banana Pi, and even Intel with its newly announced Joule board. PORÓWNANIE INNYCH SBC
+- WIFI Pineapple by Hak5 https://shop.hak5.org/
+
+## Niestabilność systemu kali linux arm dla RPi 3
+- login loop dla lightdm (zmiana $ chown kali:kali .Xauthority)
+- wolne działanie dla gnome i gdm3
 
 ##LAF:
 paper: A passive user-side solution for evil twin access point detection at public hotspots
@@ -54,3 +59,14 @@ python script on 182 page of Second Edition
 ## Site Cloning i DNS chef i SEToolkit (mega!)
 wiele do sprawdzenia, udaje się przechwytać ruch strony, hasło i login na przykład dla linuxquestion
 Trzeba się jeszcze nauczyć o dns poisoning!
+
+## Rogue Acces Point
+wymagania: (lepiej jak będzie połączenie ethernet)
+linki:
+- https://www.youtube.com/watch?v=tIM-kdmKhnE
+- https://null-byte.wonderhowto.com/how-to/build-pumpkin-pi-rogue-ap-mitm-framework-fits-your-pocket-0177792/
+
+mitmAP:
+SSLSTRIP 2.0 
+DRIFTNET
+można nawet zezwolić na WPA2 jeżeli sytuacja jest taka, żeużytkownik spodziewa się hasła.
