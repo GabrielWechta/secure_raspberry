@@ -9,6 +9,9 @@ apt-get upgrade -y
 apt-get install snapd -y
 systemctl enable --now snapd apparmor
 
+# Sniffer 
+sudo apt-get install tcpflow -y
+
 # Python
 apt install python3-pip -y
 

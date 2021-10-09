@@ -1,0 +1,10 @@
+# configure the interface
+set interface wlan1 
+# set name of access point will be created
+set ssid FreeWiFi
+# set noproxy plguin
+set proxy noproxy
+# ignore all log from pydns_server 
+ignore pydns_server
+# start the Access Point
+start

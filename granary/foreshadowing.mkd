@@ -70,3 +70,7 @@ mitmAP:
 SSLSTRIP 2.0 
 DRIFTNET
 można nawet zezwolić na WPA2 jeżeli sytuacja jest taka, żeużytkownik spodziewa się hasła.
+
+## WifiPumpkin3 
+https://wifipumpkin3.github.io/docs/getting-started
+bardzo dużo opcji wbudowanych, możliwość dodawania własnych, napisać o tym.
