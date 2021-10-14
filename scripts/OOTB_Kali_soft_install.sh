@@ -9,6 +9,9 @@ apt-get upgrade -y
 apt-get install snapd -y
 systemctl enable --now snapd apparmor
 
+# System Managment
+apt install htop -y
+
 # Sniffer 
 sudo apt-get install tcpflow -y
 

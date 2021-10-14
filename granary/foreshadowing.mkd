@@ -8,9 +8,23 @@ things that should be mentioned in the ET paper.
 - There are very popular options out there such as, Arduino, Banana Pi, and even Intel with its newly announced Joule board. PORÓWNANIE INNYCH SBC
 - WIFI Pineapple by Hak5 https://shop.hak5.org/
 
+## Odcięcie zasilania zamiast proper shutdown
+- tutaj wspaniały opis: https://raspberrypi.stackexchange.com/questions/73716/strange-problem-on-startup-cannot-open-access-to-console - jak obejsc problem
+lepiej jest naprawić file system, dalej nalezalo:
+	- wyjąć karte SD
+	- włożyć ją do laptopa
+	- zrobić $ umount /dev/sdc1 i $ umount /dev/sdc2
+	- aby sprawdzić błędy można puścić $ fsck /dev/sdc1 i $ fsck /dev/sdc2
+	- aby naprawić błędy automatycznie $ fsck -fy /dev/sdc1 i $ fsck -fy /dev/sdc2
+	log w pliku fsck_log
+- należy zwrócić uwagę jak znacznie szybciej po tej operacji OS się bootuje
+
 ## Niestabilność systemu kali linux arm dla RPi 3
+- dla prawdziwej podrózy warto odpalić $journalctl -xb po boocie aby zobaczyć wszystkie service ktore mialy faila
+- losowe zaprzestanie działania myszki usb Logitech - odpięcie nie rozwiązuje problemu, natomaist odpiecie i podpiecie do innego portu usb rozwiazuje, po powrocie do oryginalegno portu działa z powrotem.
 - login loop dla lightdm (zmiana $ chown kali:kali .Xauthority)
 - wolne działanie dla gnome i gdm3
+- scdeamon missing? ($ sudo apt install scdeamon -y)
 
 ##LAF:
 paper: A passive user-side solution for evil twin access point detection at public hotspots

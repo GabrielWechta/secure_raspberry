@@ -1,0 +1,53 @@
+```
+	gabriel@gabriel:~$ sudo fsck -fy /dev/sdc2
+fsck from util-linux 2.34
+e2fsck 1.45.5 (07-Jan-2020)
+Pass 1: Checking inodes, blocks, and sizes
+Pass 2: Checking directory structure
+Pass 3: Checking directory connectivity
+Pass 4: Checking reference counts
+Unattached inode 132004
+Connect to /lost+found? yes
+
+Inode 132004 ref count is 2, should be 1.  Fix? yes
+
+Inode 132571 ref count is 1, should be 2.  Fix? yes
+
+Unattached inode 1099465
+Connect to /lost+found? yes
+
+Inode 1099465 ref count is 2, should be 1.  Fix? yes
+
+Pass 5: Checking group summary information
+Block bitmap differences:  -(923656--923705) -923761 -923909 -923928 -923930 -923932 -(924164--924198) -(924200--924256) -924260 -924331 -924336 -(924672--924745) -924825 -924836 -924918 -924923 -(925188--925228) -(925231--925232) -(925234--925241) -925359 -925407 -925521 -(926720--926727) -926736 -927232 -933590 -934400 -(936448--936449) -(936961--936974) -(936976--936978) -(936983--936984) -(936986--936991) +(4531107--4531109)
+Fix? yes
+
+Free blocks count wrong for group #28 (20919, counted=21239).
+Fix? yes
+
+Free blocks count wrong for group #138 (22012, counted=22009).
+Fix? yes
+
+Free blocks count wrong for group #142 (13654, counted=13626).
+Fix? yes
+
+Free blocks count wrong (4275651, counted=4275940).
+Fix? yes
+
+Inode bitmap differences:  -142328 -142956 -146152 -(1099458--1099464) -(1099466--1099467) -(1099469--1099472)
+Fix? yes
+
+Free inodes count wrong for group #17 (0, counted=3).
+Fix? yes
+
+Free inodes count wrong for group #134 (1637, counted=1650).
+Fix? yes
+
+Free inodes count wrong (1429721, counted=1429737).
+Fix? yes
+
+
+ROOTFS: ***** FILE SYSTEM WAS MODIFIED *****
+ROOTFS: 512343/1942080 files (0.2% non-contiguous), 3506460/7782400 blocks
+
+	```
