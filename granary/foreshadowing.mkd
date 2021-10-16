@@ -67,6 +67,21 @@ Crunch 8 8 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQR STUVWXYZ0123456789 | air
 ```
 Osiąga temperatury ~85C. ~250 słów/sekunde, przy ~50C. ~300 słów/sekunde
 
+
+## Connecting via ssh
+$ ifconfig (net-tools requiered)
+albo
+$ hostname -I
+aby dostac local_ip
+
+$ nmap -sP $local_ip/24
+zwróci adres RPi rpi_ip
+
+ssh kali@$rpi_ip
+
+## Copying files via ssh session (super!!! - sshfs)
+https://www.simplified.guide/ssh/copy-file
+
 ## Save file transfer
 python script on 182 page of Second Edition
 
@@ -83,7 +98,7 @@ linki:
 mitmAP:
 SSLSTRIP 2.0 
 DRIFTNET
-można nawet zezwolić na WPA2 jeżeli sytuacja jest taka, żeużytkownik spodziewa się hasła.
+można nawet zezwolić na WPA2 jeżeli sytuacja jest taka, że użytkownik spodziewa się hasła.
 
 ## WifiPumpkin3 
 https://wifipumpkin3.github.io/docs/getting-started

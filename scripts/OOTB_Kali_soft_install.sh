@@ -12,8 +12,13 @@ systemctl enable --now snapd apparmor
 # System Managment
 apt install htop -y
 
+# Docker
+apt install -y docker.io
+sudo systemctl enable docker --now
+sudo usermod -aG docker $USER
+
 # Sniffer 
-sudo apt-get install tcpflow -y
+apt-get install tcpflow -y
 
 # Python
 apt install python3-pip -y
