@@ -8,6 +8,9 @@ apt-get upgrade -y
 # Sniffer 
 apt-get install tcpflow -y
 
+# ncat - Netcat for XXI century
+apt install ncat -y
+
 # Docker
 apt install -y docker.io
 sudo systemctl enable docker --now

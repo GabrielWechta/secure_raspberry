@@ -26,6 +26,20 @@ lepiej jest naprawić file system, dalej nalezalo:
 - wolne działanie dla gnome i gdm3
 - scdeamon missing? ($ sudo apt install scdeamon -y)
 
+## O IP, NAT i PAT
+see: https://opensource.com/article/18/5/how-find-ip-address-linux
+
+Public and private IP addresses
+To understand the significance of public and private IP addresses, let's have a look at a concept called NAT (Network Address Translation) and PAT (Port Address Translation).
+
+Private addresses are used in Local Area Networks (LAN). They are bound to a specific network.
+
+Public addresses are necessary for establishing external connectivity to other networks, most notably the "Worldwide Web" (www) of the Internet.
+
+NAT is a translation of a private IP to a public one, and consists of three major types: static, dynamic, and PAT. In static NAT, one private IP is mapped to one public IP. A common example ru ydco is a firewall. In dynamic NAT, a private IP address is mapped to a public IP but from a pool of public IP addresses.
+
+With a total of 2^32 IPv4 addresses, out of which approximately just 3.7 billion are public addresses, there are literally more people and devices than there are IP addresses. And yet we haven't run out of addresses. That's because of a concept called PAT, which allows for a single public IP address to be translated from multiple (generally all) private IP addresses using port numbers. Here, instead of assigning a public address to each device, a single public address is allocated to the external side, and private addresses are assigned to each device within the internal network. PAT is most widely used in residential wireless routers, which we use to connect to the Internet.
+
 ##LAF:
 paper: A passive user-side solution for evil twin access point detection at public hotspots
 - An evil twin is a kind of rogue APs. [...]
@@ -82,6 +96,8 @@ ssh kali@$rpi_ip
 ## Copying files via ssh session (super!!! - sshfs)
 https://www.simplified.guide/ssh/copy-file
 
+$ scp remote_username@10.10.0.2:/remote/file.txt /local/directory
+
 ## Save file transfer
 python script on 182 page of Second Edition
 
@@ -103,3 +119,7 @@ można nawet zezwolić na WPA2 jeżeli sytuacja jest taka, że użytkownik spodz
 ## WifiPumpkin3 
 https://wifipumpkin3.github.io/docs/getting-started
 bardzo dużo opcji wbudowanych, możliwość dodawania własnych, napisać o tym.
+
+## RAP Detector 
+- napisać od TCP - SYN, SYN ACK, ACK, PSH ACK, ACK
+
