@@ -5,6 +5,10 @@
 apt-get update
 apt-get upgrade -y
 
+# CLI utils
+apt install tree -y
+apt-get install tshark -y
+
 # Package Menagers
 apt-get install snapd -y
 systemctl enable --now snapd apparmor

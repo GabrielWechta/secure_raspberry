@@ -120,6 +120,15 @@ można nawet zezwolić na WPA2 jeżeli sytuacja jest taka, że użytkownik spodz
 https://wifipumpkin3.github.io/docs/getting-started
 bardzo dużo opcji wbudowanych, możliwość dodawania własnych, napisać o tym.
 
-## RAP Detector 
-- napisać od TCP - SYN, SYN ACK, ACK, PSH ACK, ACK
+## Port scanner aby dostać liste hostów z którymi będzie się łaczył RAPDetector
+https://nmap.org/book/synscan.html
+https://nmap.org/book/scan-methods-null-fin-xmas-scan.html
+opisać głośny, cichy, FIN scan, xmas scan
+więcej w Python penetration testing Cookbook s61
 
+## RAP Detector 
+- napisać o TCP - SYN, SYN ACK, ACK, PSH ACK, ACK, FIN, RST
+
+## Sniffer
+- wybór sniffera pakietów: scapy ma wolny sniffer, lepiej uzywac tcpdumpa
+- sniffer AC: https://pypi.org/project/nmcli/

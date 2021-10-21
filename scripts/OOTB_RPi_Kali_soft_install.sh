@@ -5,6 +5,10 @@
 apt-get update
 apt-get upgrade -y
 
+# CLI utils
+apt install tree -y
+apt-get install tshark -y
+
 # Sniffer 
 apt-get install tcpflow -y
 
