@@ -128,6 +128,12 @@ więcej w Python penetration testing Cookbook s61
 
 ## RAP Detector 
 - napisać o TCP - SYN, SYN ACK, ACK, PSH ACK, ACK, FIN, RST
+- napisać o - problem z RST wysyłanym przez OS nie przez skrypt, tutaj więcej: https://stackoverflow.com/questions/9058052/unwanted-rst-tcp-packet-with-scapy
+- $ sudo iptables -A OUTPUT -p tcp --tcp-flags RST RST -s 192.168.1.26 -d 172.217.16.3 --dport 80 -j DROP
+- $ iptables -A OUTPUT -s 192.168.1.26 -d 172.217.16.3 -p ICMP --icmp-type port-unreachable -j DROP
+- natomiast możemy wykorzystać reackję kernela, jako pozytywne działanie. Przez to nie trzeba oskryptowywać zamknięcia połączenia TCP.
+- Mierzenie czasu odbierania paciektów musi być wykonane przez inny proces robiacy tcpdumpa, ponieważ liczenie time_1 przed wysłaniem pakietu SYN i po odbiorze SYN/ACK liczenie time_2 i okreslanie czasu pomiedzy framami liczacy time_2 - time_1 wlicza wykonanie funkcji wysylajaych i jest odradzane przez tworców pakietu scapy.
+
 
 ## Sniffer
 - wybór sniffera pakietów: scapy ma wolny sniffer, lepiej uzywac tcpdumpa
