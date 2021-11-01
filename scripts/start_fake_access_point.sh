@@ -28,12 +28,8 @@ fi
 
 # cd /root/fake_access_point
 
-<<<<<<< HEAD
 # Creating hostapd.conf 
-hostapd_config="interface=wlan1mon\ndriver=nl80211\nssid=New_Way_2\nhw_mode=g\nchannel=1\nmacaddr_acl=0\nignore_broadcast_ssid=0\n" 
-=======
 hostapd_config="interface=${ap_interface}mon\ndriver=nl80211\nssid=$ssid\nhw_mode=g\nchannel=1\nmacaddr_acl=0\nignore_broadcast_ssid=0\n" 
->>>>>>> da5ef2c0458ad5658f7d4541cdb45d6ace00b558
 
 echo -en $hostapd_config > /root/fake_access_point/hostapd.conf 
 
