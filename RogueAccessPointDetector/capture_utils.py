@@ -74,3 +74,9 @@ if __name__ == "__main__":
     plt.show()
 
     # plt.show()
+
+# from sklearn.linear_model import LogisticRegression
+#
+# reg = LogisticRegression
+#
+# reg.fit(df.beta_1)
