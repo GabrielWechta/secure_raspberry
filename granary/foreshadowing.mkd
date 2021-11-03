@@ -104,13 +104,18 @@ https://github.com/danielmiessler/SecLists
 
 
 ## WPA/WPA2 Password Cracking
+innym sposobem na dostanie PSK to wymuszenie polaczenia do Fake Access Point i phishing hasła przez captive portal. Ale o tym nie będziemy pisać.
+
+świenty w artykuł: https://medium.com/asecuritysite-when-bob-met-alice/the-beginning-of-the-end-of-wpa-2-cracking-wpa-2-just-got-a-whole-lot-easier-55d7775a7a5a
 napisać o WPA - mendeley artykuł
 https://sekurak.pl/bezpieczenstwo-sieci-wi-fi-czesc-5-testowanie-wpa-i-wpa2/
 
 http://lastbit.com/pswcalc.asp - czas potrzebny na crunchowanie hasła
+fajny paper o nowym ataku z 2017: https://papers.mathyvanhoef.com/ccs2017.pdf
 ```
 crunch [min char] [max char] {char set] | aircrack-ng -e [SSID Name] -w -/[location & name to store the capture]
 Crunch 8 8 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQR STUVWXYZ0123456789 | aircrack-ng -e PENTEST_NET -w - rootDesktop/WPA_Crack-01.cap
+OSINT?
 ```
 Osiąga temperatury ~85C. ~250 słów/sekunde, przy ~50C. ~300 słów/sekunde
 
