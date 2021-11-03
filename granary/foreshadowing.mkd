@@ -53,7 +53,14 @@ paper: A passive user-side solution for evil twin access point detection at publ
 ## Other books:
 - Kali Linux - Assuring Security by Penetration Testing , Packt Publishing (by Tedi Heriyanto, Lee Allen, and Shakeel Ali)
 
-## Turning WiFi interface to monitor mode
+## Turning wireless interface to monitor mode
+Podobnie jak w kartach LAN, w celu odebrania pakietów, które nie są do nas adresowane, kartę sieci LAN należy przełączyć w tryb promiscuous...
+https://sekurak.pl/bezpieczenstwo-sieci-wi-fi-czesc-2-wprowadzenie-do-nasluchiwania-ruchu/
+
+lista dostępnych: https://www.wirelesshack.org/best-kali-linux-compatible-usb-adapter-dongles.html
+
+W przypadku zakupu nowej karty, najlepszym rozwiązaniem wydają się te oparte o układ Atheros, gdyż dają największe możliwości niskopoziomowego sterowania kartą.
+
 WPA/WPA2 supports many types of authentication beyond pre-shared keys. aircrack-ng can ONLY crack pre-shared keys. So make sure airodump-ng shows the network as having the authentication type of PSK, otherwise, don't bother trying to crack it.
 
 Remember that just because you can receive packets from them does not mean you may will be able to transmit packets to them. The wireless card strength is typically less then the AP strength. So you have to be physically close enough for your transmitted packets to reach and be received by both the AP and the wireless client. You can confirm that you can communicate with the specific AP by following these instructions.
@@ -71,15 +78,48 @@ opisać wybór karty sieciowej:
 stare - TP-LINK mają chipset **Qualcomm Atheros Communications AR9271 802.11n** i driver **ath9k_htc** z włączoną możliwością przejścia w *monitor mode*.
 nowe - TP-LINK mają chipset **TP-Link TL-WN722N v2/v3 Realtek RTL8188EUS** i driver rtl8188eu, który nie ma możliwości włączenia *monitor mode* i karta może być używana wyłacznie w *managed mode*.
 
+## o WiFI
+w zasadzie przejrzeć cały ten kurs i opisać co ciekawe:
+https://sekurak.pl/bezpieczenstwo-sieci-wi-fi-czesc-1/
+1. Rozgłaszanie sieci
+Jednym z pierwszych pomysłów na zabezpieczenie sieci Wi-Fi było wyłączenie rozgłaszania SSID przez AP. Miało to zabezpieczyć przed wykryciem obecności sieci, a atakujący, bez znajomości SSID, nie mógłby się do niej podłączyć. Niestety, szybko okazało się, że metoda ta jest całkowicie nieskuteczna, ponieważ SSID jest rozgłaszany na żądanie dowolnego klienta lub istnieje możliwość podsłuchania SSID przy pomocy snifferów sieciowych.
+
+WEP -> WPA/WPA2 
+RSN
+CCMP
+
+https://routersecurity.org/wpa2wpa3wpaenterprise.php
+ 
+## WiFi Password Hacking
+https://null-byte.wonderhowto.com/how-to/hack-wi-fi-cracking-wpa2-psk-passwords-using-aircrack-ng-0148366/
+
+zajebisty opis aircracka-ng: https://sekurak.pl/bezpieczenstwo-sieci-wi-fi-czesc-2-wprowadzenie-do-nasluchiwania-ruchu/
+
+
+heap, "fire-and-forget" cyberweapons, designed to harvest and crack WPA networks in a given area and then be discarded, are small and light enough to be left in an Altoids tin in the trash, dropped by a small drone on a roof, or tossed over a fence by hand. The same devices can also be used to deliberately jam or attempt to exploit the router of any nearby Wi-Fi network with a bad password.
+
+Security names list :
+https://github.com/danielmiessler/SecLists
+
+
 
 ## WPA/WPA2 Password Cracking
 napisać o WPA - mendeley artykuł
+https://sekurak.pl/bezpieczenstwo-sieci-wi-fi-czesc-5-testowanie-wpa-i-wpa2/
+
 http://lastbit.com/pswcalc.asp - czas potrzebny na crunchowanie hasła
 ```
 crunch [min char] [max char] {char set] | aircrack-ng -e [SSID Name] -w -/[location & name to store the capture]
 Crunch 8 8 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQR STUVWXYZ0123456789 | aircrack-ng -e PENTEST_NET -w - rootDesktop/WPA_Crack-01.cap
 ```
 Osiąga temperatury ~85C. ~250 słów/sekunde, przy ~50C. ~300 słów/sekunde
+
+napisać o:
+$ crunch
+$ hashcat
+$ jack (the ripper)
+$ gotowych słownikach link:https://www.wirelesshack.org/wpa-wpa2-word-list-dictionaries.html
+
 
 
 ## Connecting via ssh

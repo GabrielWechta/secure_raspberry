@@ -59,6 +59,9 @@ apt-get install mendeleydesktop -y
 # Media Player - VLC 
 sudo snap install vlc
 
+# Security List
+apt install seclists -y
+
 # Repositories again
 apt-get update
 apt-get upgrade -y
