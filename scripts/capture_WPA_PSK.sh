@@ -35,7 +35,7 @@ capture_file_name=wpa_capture_${current_time}
 
 xterm -title "airodump-ng on ${bssid}" -e airodump-ng --bssid $bssid -c $channel --write $capture_file_name $wn_interface_monitor &
 
-echo "In order to keep level of network jamming at minimum you will send deauth by hand. Look on the second terminal if you see 'WPA handshake' (right top coner) you are golden."
+echo "In order to keep level of network jamming at minimum you will send deauth signal by hand. Look on the second terminal if you see 'WPA handshake' (right top coner) you are golden."
 
 continue_loop=true
 

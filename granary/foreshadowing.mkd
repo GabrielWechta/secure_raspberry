@@ -91,6 +91,7 @@ CCMP
 https://routersecurity.org/wpa2wpa3wpaenterprise.php
  
 ## WiFi Password Hacking
+rainbow tables exist for the top 1,000 network SSIDs and a multitude of common passwords, requiring only a quick lookup to speed up cracking WPA-PSK from :https://en.wikipedia.org/wiki/Wi-Fi_Protected_Access
 https://null-byte.wonderhowto.com/how-to/hack-wi-fi-cracking-wpa2-psk-passwords-using-aircrack-ng-0148366/
 
 zajebisty opis aircracka-ng: https://sekurak.pl/bezpieczenstwo-sieci-wi-fi-czesc-2-wprowadzenie-do-nasluchiwania-ruchu/
@@ -100,7 +101,8 @@ heap, "fire-and-forget" cyberweapons, designed to harvest and crack WPA networks
 
 Security names list :
 https://github.com/danielmiessler/SecLists
-
+https://crackstation.net/crackstation-wordlist-password-cracking-dictionary.htm
+https://wpa-sec.stanev.org/?dicts
 
 
 ## WPA/WPA2 Password Cracking
@@ -124,6 +126,9 @@ $ crunch
 $ hashcat
 $ jack (the ripper)
 $ gotowych słownikach link:https://www.wirelesshack.org/wpa-wpa2-word-list-dictionaries.html
+
+wersja dla hashcata:
+https://hashcat.net/wiki/doku.php?id=cracking_wpawpa2
 
 
 
