@@ -2,6 +2,7 @@
 # Run with root privileges.
 wn_interface=${wn_interface:-wlan1}
 target_bssid=${target_bssid:-"not_specified"}
+output_folder=${output_folder:-.}
 
 while [ $# -gt 0 ]; do
 
@@ -33,7 +34,7 @@ sleep 1
 echo "Forwarding choosen AP's BSSID to configuration file."
 echo $target_bssid >target_bssid.txt
 
-hcxdumptool -i $wn_interface -o dumpfile.pcapng --active_beacon --enable_status=1 --filterlist_ap=target_bssid.txt --filtermode=2
+hcxdumptool -i $wn_interface -o ${output_folder}/dumpfile.pcapng --active_beacon --enable_status=1 --filterlist_ap=target_bssid.txt --filtermode=2
 
 echo "Bringing back wlan services..."
 systemctl start wpa_supplicant.service
@@ -43,6 +44,6 @@ sleep 1
 rm target_bssid.txt
 
 echo "Converting the traffic to hash format 22000."
-hcxpcapngtool -o hash.hc22000 dumpfile.pcapng
+hcxpcapngtool -o ${output_folder}/hash.hc22000 ${output_folder}/dumpfile.pcapng
 
 echo "done"

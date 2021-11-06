@@ -20,6 +20,27 @@ apt install -y docker.io
 sudo systemctl enable docker --now
 sudo usermod -aG docker $USER
 
+# Hashcat tools
+apt-get install libcurl4-openssl-dev libssl-dev pkg-config
+
+cd ~/opt
+git clone https://github.com/ZerBea/hcxdumptool.git
+cd hcxdumptool
+make
+make install
+
+cd ~/opt
+git clone https://github.com/ZerBea/hcxtools.git
+cd hcxtools
+make
+make install
+
+cd ~/opt
+git clone https://github.com/hashcat/hashcat.git
+cd hashcat
+make 
+make install
+
 # Repositories again
 apt-get update
 apt-get upgrade -y

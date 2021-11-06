@@ -40,12 +40,6 @@ NAT is a translation of a private IP to a public one, and consists of three majo
 
 With a total of 2^32 IPv4 addresses, out of which approximately just 3.7 billion are public addresses, there are literally more people and devices than there are IP addresses. And yet we haven't run out of addresses. That's because of a concept called PAT, which allows for a single public IP address to be translated from multiple (generally all) private IP addresses using port numbers. Here, instead of assigning a public address to each device, a single public address is allocated to the external side, and private addresses are assigned to each device within the internal network. PAT is most widely used in residential wireless routers, which we use to connect to the Internet.
 
-##LAF:
-paper: A passive user-side solution for evil twin access point detection at public hotspots
-- An evil twin is a kind of rogue APs. [...]
-- 4.4 | Comparisons with other work
-- takich testów jak oni nie przeprowadzimy :C
-
 ## Covering tracks
 - tunneling
 - ssh, all the tools in the 2nd Chapter Penetration Testing with Raspberry Pi - Second Edition
@@ -104,6 +98,8 @@ https://github.com/danielmiessler/SecLists
 https://crackstation.net/crackstation-wordlist-password-cracking-dictionary.htm
 https://wpa-sec.stanev.org/?dicts
 
+testy odbędą się na liście "rockyou", dostępnej między innymi na portalu Kaggle: https://www.kaggle.com/wjburns/common-password-list-rockyoutxt# - naisać troche o tym i o innych żródłach haseł 
+
 
 ## WPA/WPA2 Password Cracking
 innym sposobem na dostanie PSK to wymuszenie polaczenia do Fake Access Point i phishing hasła przez captive portal. Ale o tym nie będziemy pisać.
@@ -129,7 +125,7 @@ $ gotowych słownikach link:https://www.wirelesshack.org/wpa-wpa2-word-list-dict
 
 wersja dla hashcata:
 https://hashcat.net/wiki/doku.php?id=cracking_wpawpa2
-
+opis nowego sposobu ataku: https://hashcat.net/forum/thread-7717.html
 
 
 ## Connecting via ssh
@@ -184,6 +180,12 @@ więcej w Python penetration testing Cookbook s61
 - natomiast możemy wykorzystać reackję kernela, jako pozytywne działanie. Przez to nie trzeba oskryptowywać zamknięcia połączenia TCP.
 - Mierzenie czasu odbierania paciektów musi być wykonane przez inny proces robiacy tcpdumpa, ponieważ liczenie time_1 przed wysłaniem pakietu SYN i po odbiorze SYN/ACK liczenie time_2 i okreslanie czasu pomiedzy framami liczacy time_2 - time_1 wlicza wykonanie funkcji wysylajaych i jest odradzane przez tworców pakietu scapy.
 
+##LAF:
+paper: A passive user-side solution for evil twin access point detection at public hotspots
+- An evil twin is a kind of rogue APs. [...]
+- 4.4 | Comparisons with other work
+- takich testów jak oni nie przeprowadzimy :C
+- 
 
 ## Sniffer
 - wybór sniffera pakietów: scapy ma wolny sniffer, lepiej uzywac tcpdumpa
