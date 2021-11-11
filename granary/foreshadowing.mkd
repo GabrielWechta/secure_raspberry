@@ -4,6 +4,10 @@ things that should be mentioned in the ET paper.
 - how to combine the power of Kali Linux with the portability and low cost of a Raspberry Pi.
 - used the portability of the Raspberry Pi to test security assessment covertly at different locations, and have configured the Raspberry Pi to be managed remotely with little footprint.
 
+
+https://null-byte.wonderhowto.com/how-to/raspberry-pi-alternatives-10-single-board-computers-worthy-hacking-projects-big-small-0196340/
+
+
 ## Raspberry Pi - 2nd Edition 
 - There are very popular options out there such as, Arduino, Banana Pi, and even Intel with its newly announced Joule board. PORÓWNANIE INNYCH SBC
 - WIFI Pineapple by Hak5 https://shop.hak5.org/

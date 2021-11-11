@@ -20,6 +20,9 @@ apt install -y docker.io
 sudo systemctl enable docker --now
 sudo usermod -aG docker $USER
 
+# xterm for capture_WPA.sh
+apt-get install xterm -y
+
 # Hashcat tools
 apt-get install libcurl4-openssl-dev libssl-dev pkg-config
 

