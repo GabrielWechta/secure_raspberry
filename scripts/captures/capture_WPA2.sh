@@ -19,6 +19,7 @@ while [ $# -gt 0 ]; do
 done
 
 if [[ $wn_interface == "not_specified" ]]; then
+  echo "Showing WNICs."
   iwconfig
   read -p "Type the interface: " wn_interface
 fi
@@ -124,6 +125,9 @@ elif [[ $method == "4_way_handshake_hashcat" ]]; then
   systemctl start NetworkManager.service
   sleep 1
 
+  echo "Reversing ${wn_interface_monitor} back to ${wn_interface}."
+  airmon-ng stop $wn_interface_monitor
+
   rm target_bssid.txt
 
   echo "Converting the traffic to hash format 22000."
@@ -168,6 +172,9 @@ elif [[ $method == "pmkid_hashcat" ]]; then
   systemctl start wpa_supplicant.service
   systemctl start NetworkManager.service
   sleep 1
+
+  echo "Reversing ${wn_interface_monitor} back to ${wn_interface}."
+  airmon-ng stop $wn_interface_monitor
 
   hcxpcaptool -E essidlist -I identitylist -U usernamelist -z ${capture_file_name}.hc16800 dumpfile.pcapng
 

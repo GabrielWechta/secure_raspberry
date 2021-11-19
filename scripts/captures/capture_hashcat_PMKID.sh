@@ -1,6 +1,6 @@
 #!bin/bash
 # Run with root privileges.
-wn_interface=${wn_interface:-wlan1}
+wn_interface=${wn_interface:-"not_specified"}
 target_bssid=${target_bssid:-"not_specified"}
 capture_file_name=${capture_file_name:-"not_specified"}
 
@@ -16,6 +16,7 @@ while [ $# -gt 0 ]; do
 done
 
 if [[ $wn_interface == "not_specified" ]]; then
+  echo "Showing WNICs."
   iwconfig
   read -p "Type the interface: " wn_interface
 fi
@@ -51,6 +52,9 @@ systemctl start NetworkManager.service
 sleep 1
 
 hcxpcaptool -E essidlist -I identitylist -U usernamelist -z ${capture_file_name}.hc16800 dumpfile.pcapng
+
+echo "Reversing ${wn_interface_monitor} back to ${wn_interface}."
+airmon-ng stop $wn_interface_monitor
 
 rm target_bssid.txt
 
