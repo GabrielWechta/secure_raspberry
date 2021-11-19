@@ -19,6 +19,7 @@ while [ $# -gt 0 ]; do
 done
 
 if [[ $wn_interface == "not_specified" ]]; then
+  iwconfig
   read -p "Type the interface: " wn_interface
 fi
 
