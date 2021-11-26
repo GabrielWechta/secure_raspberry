@@ -1,5 +1,7 @@
 import subprocess
 import re
+
+import netifaces
 import nmcli
 from itertools import chain
 
@@ -68,10 +70,24 @@ def get_current_wifi_network_info():
             return dev
 
 
+def get_wireless_network_interface() -> str:
+    """
+    Get some available wireless network interface card. This function assumes that wireless
+    interface begins with 'w'.
+    :return: Name of some available wireless network interface card.
+    """
+    network_interfaces_card = netifaces.interfaces()
+    for nic in network_interfaces_card:
+        if nic.startswith("w"):
+            return nic
+
+    raise ValueError("No wireless network interface card has been found.")
+
+
 if __name__ == "__main__":
     # show_wifi_devices()
     # wifi_dev_dict = build_wifi_devices_dictionary()
     # look_for_repeated_ssid(wifi_dev_dict)
     # connect_to_network_by_bssid("64:66:B3:1E:26:EF")
-    # show_wifi_devices()
+    show_wifi_devices()
     get_current_wifi_network_info()

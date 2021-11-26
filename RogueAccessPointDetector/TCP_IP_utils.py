@@ -1,5 +1,6 @@
 from scapy.layers.inet import *
 from scapy.all import send
+import netifaces
 
 
 # source_port = random.randint(1024, 65535)
@@ -12,6 +13,7 @@ from scapy.all import send
 # # SYN-ACK
 # ACK = TCP(sport=source_port, dport=443, flags='A', seq=SYNACK.ack + 1, ack=SYNACK.seq + 1)
 # send(ip / ACK)
+
 
 
 def start_3_way_handshake(destination_ip, destination_port):
