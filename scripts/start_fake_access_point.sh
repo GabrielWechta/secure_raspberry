@@ -17,6 +17,7 @@ done
 # apt-get install hostapd dnsmasq apache2 # required packages
 
 airmon-ng start $ap_interface
+wn_interface_monitor=${ap_interface}mon
 
 echo "Configuration is being done."
 echo "I am assuming default locations for config files."
@@ -29,7 +30,7 @@ fi
 # cd /root/fake_access_point
 
 # Creating hostapd.conf 
-hostapd_config="interface=${ap_interface}mon\ndriver=nl80211\nssid=$ssid\nhw_mode=g\nchannel=1\nmacaddr_acl=0\nignore_broadcast_ssid=0\n" 
+hostapd_config="interface=${wn_interface_monitor}\ndriver=nl80211\nssid=$ssid\nhw_mode=g\nchannel=1\nmacaddr_acl=0\nignore_broadcast_ssid=0\n" 
 
 echo -en $hostapd_config > /root/fake_access_point/hostapd.conf 
 
@@ -38,24 +39,23 @@ xterm -title "hostapd" -e hostapd /root/fake_access_point/hostapd.conf &
 sleep 1
 
 # Creating dnsmasq.conf 
-dnsmasq_config="interface=${ap_interface}mon\ndhcp-range=192.168.1.2, 192.168.1.30, 255.255.255.0, 12h\ndhcp-option=3, 192.168.1.1\ndhcp-option=6, 192.168.1.1\nserver=8.8.8.8\nlog-queries\nlog-dhcp\nlisten-address=127.0.0.1\n"
+dnsmasq_config="interface=${wn_interface_monitor}\ndhcp-range=192.168.1.2, 192.168.1.30, 255.255.255.0, 12h\ndhcp-option=3, 192.168.1.1\ndhcp-option=6, 192.168.1.1\nserver=8.8.8.8\nlog-queries\nlog-dhcp\nlisten-address=127.0.0.1\n"
 
 echo -en $dnsmasq_config > /root/fake_access_point/dnsmasq.conf 
 
 # Routing table and gateway
 # Now we need to assign the interface a network gateway and netmask and then add the routing table.
-ifconfig ${ap_interface}mon up 192.168.1.1 netmask 255.255.255.0
+ifconfig ${wn_interface_monitor} up 192.168.1.1 netmask 255.255.255.0
 route add -net 192.168.1.0 netmask 255.255.255.0 gw 192.168.1.1
 
 echo "Starting Domain Name System (DNS) and Dynamic Host Configuration Protocol (DHCP)..."
 xterm -title "dnsmasq" -e dnsmasq -C /root/fake_access_point/dnsmasq.conf -d &
 sleep 1
 
-echo "Forwarding traffic from wlan0, to wlan1mon."
 # Internet access 
-echo "Forwarding traffic from ${internet_access_interface}, to ${ap_interface}mon."
+echo "Forwarding traffic from ${internet_access_interface}, to ${wn_interface_monitor}."
 iptables --table nat --append POSTROUTING --out-interface ${internet_access_interface} -j MASQUERADE # Interface name that is used to forward traffic from.
-iptables --append FORWARD --in-interface ${ap_interface}mon -j ACCEPT # Interface name to receive the packets or the interface that is being forwarded to.
+iptables --append FORWARD --in-interface ${wn_interface_monitor} -j ACCEPT # Interface name to receive the packets or the interface that is being forwarded to.
 
 echo "Enabling IP Forwarding..."
 echo 1 > /proc/sys/net/ipv4/ip_forward
@@ -74,9 +74,9 @@ killall dnsmasq
 echo "Killing xterm(s)..."
 killall xterm
 
-echo "Setting ${ap_interface} interface back to monitor mode..."
-ifconfig ${ap_interface}mon down
-ip link set ${ap_interface}mon name ${ap_interface} # changing name after being in monitor mode back to original
+echo "Setting ${wn_interface_monitor} interface back to monitor mode..."
+ifconfig ${wn_interface_monitor} down
+ip link set ${wn_interface_monitor} name ${ap_interface} # changing name after being in monitor mode back to original
 iwconfig ${ap_interface} mode managed
 ifconfig ${ap_interface} up
 
