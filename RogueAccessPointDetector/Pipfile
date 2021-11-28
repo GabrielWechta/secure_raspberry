@@ -8,6 +8,10 @@ pyshark = "*"
 scapy = "*"
 netifaces = "*"
 nmcli = "*"
+kamene = "*"
+pandas = "*"
+matplotlib = "*"
+scipy = "*"
 
 [dev-packages]
 pandas = "*"

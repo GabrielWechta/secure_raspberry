@@ -1,0 +1,20 @@
+mean:
+Legal         0.064622
+Evil Twin     0.070308
+median:
+Legal         0.065379
+Evil Twin     0.069140
+mean:
+Legal         0.065973
+Evil Twin     0.065883
+median:
+Legal         0.067814
+Evil Twin     0.067188Legal        0.065146
+Evil Twin    0.063672
+dtype: float64Legal        0.066060
+Evil Twin    0.066345
+dtype: float64Legal        0.064077
+Evil Twin    0.066851
+dtype: float64Legal        0.061092
+Evil Twin    0.069119
+dtype: float64
