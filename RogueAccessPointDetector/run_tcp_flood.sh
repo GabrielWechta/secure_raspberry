@@ -1,9 +1,24 @@
 #!/bin/bash
+# Run with root privileges.
+target_bssid=${target_bssid:-"not_specified"}
+destination_ip=${destination_ip:-"not_specified"}
+destination_port=${destination_port:-"not_specified"}
 
-nmcli device wifi connect 6C:60:EB:87:88:99
-sudo python3 tcp_flood.py --target_bssid 6C:60:EB:87:88:99 --destination_ip 212.82.100.150 --destination_port 80 --packets_number 100
+while [ $# -gt 0 ]; do
 
-sleep 2
+  if [[ $1 == *"--"* ]]; then
+    param="${1/--/}"
+    declare "$param"="$2"
+  fi
 
-nmcli device wifi connect 64:66:B3:1E:26:EF
-sudo python3 tcp_flood.py --target_bssid 64:66:B3:1E:26:EF --destination_ip 212.82.100.150 --destination_port 80 --packets_number 100
+  shift
+done
+
+nmcli device wifi connect "$target_bssid"
+
+sleep 1
+
+sudo python3 tcp_flood.py --target_bssid "$target_bssid" --destination_ip "$destination_ip" \
+--destination_port "$destination_port" --packets_number 100
+
+

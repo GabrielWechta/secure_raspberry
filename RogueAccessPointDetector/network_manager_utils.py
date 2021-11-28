@@ -6,12 +6,20 @@ import nmcli
 from itertools import chain
 
 
-def show_wifi_devices():
+def show_wifi_devices() -> None:
+    """
+    Display available Access Points.
+    """
     for dev in nmcli.device.wifi():
         print(dev)
 
 
-def build_wifi_devices_dictionary():
+def build_wifi_devices_dictionary() -> dict:
+    """
+    Build dictionary of available wifi devices.
+
+    :return: dictionary of available wifi devices following pattern [key = BSSID, value = SSID].
+    """
     wifi_dev_dict = {}
     for dev in nmcli.device.wifi():
         wifi_dev_dict[dev.bssid] = dev.ssid
@@ -26,6 +34,12 @@ def build_wifi_devices_dictionary():
 
 
 def look_for_repeated_ssid(bssid_ssid_dict: dict):
+    """
+    Find first two BSSID for APs with same SSID.
+
+    :param bssid_ssid_dict: dictionary of available wifi devices following pattern [key = BSSID, value = SSID]
+    :return: Two BSSIDs with same SSID.
+    """
     reverse_multi_dict = {}
     for key, value in bssid_ssid_dict.items():
         reverse_multi_dict.setdefault(value, set()).add(key)
@@ -34,8 +48,6 @@ def look_for_repeated_ssid(bssid_ssid_dict: dict):
 
     bssid_of_repeated_sets = list(chain.from_iterable(repeated_sets))
 
-    print(bssid_of_repeated_sets)
-    print(bssid_ssid_dict[bssid_of_repeated_sets[0]])
     return bssid_of_repeated_sets[0], bssid_of_repeated_sets[1]
 
 
@@ -46,6 +58,7 @@ def connect_to_network_by_bssid(bssid: str) -> bool:
     necessity to inject string to shell command, this function should be used with caution.
     Before executing shell command, regular expression is used to check whether function's input
     follows WPA BSSID pattern.
+
     :param bssid: Wireless network's Basic Service Set Identifier.
     :return: True if connection was established, device is connected to wireless network. False if
     there was an error during connection or input did not follow WPA BSSID pattern.
@@ -64,30 +77,16 @@ def connect_to_network_by_bssid(bssid: str) -> bool:
     return False
 
 
-def get_current_wifi_network_info():
-    for dev in nmcli.device.wifi():
-        if dev.in_use:
-            return dev
-
-
 def get_wireless_network_interface() -> str:
     """
     Get some available wireless network interface card. This function assumes that wireless
     interface begins with 'w'.
+
     :return: Name of some available wireless network interface card.
     """
-    network_interfaces_card = netifaces.interfaces()
-    for nic in network_interfaces_card:
+    network_interfaces_cards = netifaces.interfaces()
+    for nic in network_interfaces_cards:
         if nic.startswith("w"):
             return nic
 
     raise ValueError("No wireless network interface card has been found.")
-
-
-if __name__ == "__main__":
-    # show_wifi_devices()
-    # wifi_dev_dict = build_wifi_devices_dictionary()
-    # look_for_repeated_ssid(wifi_dev_dict)
-    # connect_to_network_by_bssid("64:66:B3:1E:26:EF")
-    show_wifi_devices()
-    get_current_wifi_network_info()

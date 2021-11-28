@@ -8,15 +8,11 @@ pyshark = "*"
 scapy = "*"
 netifaces = "*"
 nmcli = "*"
-kamene = "*"
 pandas = "*"
-matplotlib = "*"
 scipy = "*"
 
 [dev-packages]
-pandas = "*"
 matplotlib = "*"
-scipy = "*"
 
 [requires]
 python_version = "3.8"

@@ -1,15 +1,13 @@
 import argparse
 import time
 
-import network_manager_utils
 from TCP_IP_utils import start_3_way_handshake
-from testing_new_tcp import do_3_way
 
 
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="This script connects to server using TCP connection. In order to keep "
-                    "separate environment for scapy it will be run as separate process."
+        description="This script connects packets_number-times to server using TCP connection. In "
+                    "order to keep separate environment for scapy it is run as a separate process."
     )
 
     parser.add_argument(
@@ -50,8 +48,8 @@ if __name__ == "__main__":
     destination_ip = args.destination_ip
     packets_number = args.packets_number
 
-    # network_manager_utils.connect_to_network_by_bssid(target_bssid)
-
     for i in range(packets_number):
         start_3_way_handshake(destination_ip=destination_ip, destination_port=destination_port)
+        # In order to keep remote server from recognising this behavior as TCP Flood attack we wait
+        # for some time before sending next packet.
         time.sleep(0.1)
