@@ -13,6 +13,16 @@ def check_if_server_is_alive(destination_ip: str) -> bool:
 
 
 def syn_probe_port(destination_ip: str, destination_port: int) -> int:
+    """
+    Get status of given port.
+
+    :param destination_ip: Server's IP address.
+    :param destination_port: Server's port to test.
+    :return:
+     0 - for closed;
+     1 - for open;
+     2 - for filtered.
+    """
     port_status = 0
     source_port = RandShort()
     try:

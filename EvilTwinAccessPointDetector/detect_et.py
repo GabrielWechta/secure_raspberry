@@ -34,6 +34,14 @@ def _parse_args() -> argparse.Namespace:
         help="Open port of tested server.",
     )
 
+    parser.add_argument(
+        "--wireless_network_interface",
+        dest="wireless_network_interface",
+        default=None,
+        type=str,
+        help="Identifier for wireless network interface.",
+    )
+
     return parser.parse_args()
 
 
@@ -49,6 +57,7 @@ if __name__ == "__main__":
     args = _parse_args()
     destination_ip = args.destination_ip
     destination_port = args.destination_port
+    wireless_network_interface = args.wireless_network_interface
 
     wifi_dev_dict = build_wifi_devices_dictionary()
     beta_1_bssid, beta_2_bssid = look_for_repeated_ssid(wifi_dev_dict)
@@ -62,7 +71,8 @@ if __name__ == "__main__":
     list_of_dict_time_beta_1 = start_live_capture(packets_number=100,
                                                   dict_key_name=f"beta_1",
                                                   destination_ip=destination_ip,
-                                                  destination_port=destination_port)
+                                                  destination_port=destination_port,
+                                                  wireless_network_interface=wireless_network_interface)
 
     beta_1_flood_process.join()
     print("Finished capture for beta_1.")
@@ -76,7 +86,8 @@ if __name__ == "__main__":
     list_of_dict_time_beta_2 = start_live_capture(packets_number=100,
                                                   dict_key_name=f"beta_2",
                                                   destination_ip=destination_ip,
-                                                  destination_port=destination_port)
+                                                  destination_port=destination_port,
+                                                  wireless_network_interface=wireless_network_interface)
     beta_2_flood_process.join()
     print("Finished capture for beta_2.")
 
@@ -96,8 +107,11 @@ if __name__ == "__main__":
     beta_1_median, beta_2_median = medians[0], medians[1]
 
     if beta_1_mean >= beta_2_mean:
-        legal_bssid = beta_1_bssid
-    else:
+        et_bssid = beta_1_bssid
         legal_bssid = beta_2_bssid
+    else:
+        et_bssid = beta_2_bssid
+        legal_bssid = beta_1_bssid
 
-    print(f"Based on the mean value, legal AP has BSSID: {legal_bssid}.")
+    print()
+    print(f"Legal AP's BSSID: {legal_bssid}.", f"Evil Twin's BSSID: {et_bssid}.", sep="\n")

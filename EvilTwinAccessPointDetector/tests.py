@@ -41,6 +41,13 @@ def _parse_args() -> argparse.Namespace:
         help="Open port of tested server.",
     )
 
+    parser.add_argument(
+        "--wireless_network_interface",
+        dest="wireless_network_interface",
+        default=None,
+        type=str,
+        help="Identifier for wireless network interface.",
+    )
     return parser.parse_args()
 
 
@@ -50,6 +57,7 @@ if __name__ == "__main__":
     destination_ip = args.destination_ip
     destination_port = args.destination_port
     test_rounds_number = args.test_rounds_number
+    wireless_network_interface = args.wireless_network_interface
 
     for test_round in range(test_rounds_number):
         """ Getting data for legal Access Point. """
@@ -58,7 +66,7 @@ if __name__ == "__main__":
                                                      dict_key_name=f"Legal",
                                                      destination_ip=destination_ip,
                                                      destination_port=destination_port,
-                                                     wireless_network_interface="wlp4s0")
+                                                     wireless_network_interface=wireless_network_interface)
         print("finished legal")
 
         """ Getting data for ET Access Point. """
@@ -67,7 +75,7 @@ if __name__ == "__main__":
                                                          dict_key_name=f"Evil Twin",
                                                          destination_ip=destination_ip,
                                                          destination_port=destination_port,
-                                                         wireless_network_interface="wlp4s0")
+                                                         wireless_network_interface=wireless_network_interface)
         print("finished ET")
 
         # Merging data from both AP.
