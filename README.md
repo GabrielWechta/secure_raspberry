@@ -1,10 +1,7 @@
 # Engineering Thesis
----
 
 ### Gabriel Wechta
 Faculty of Fundamental Problems of Technology, Wrocław University of Science and Technology
-
----
 
 **Thesis topic:** Selected aspects of computer security using Single Board Computers.
 
@@ -21,12 +18,9 @@ Y. Song, C. Yang and G. Gu, Who is peeping at your passwords at Starbucks? — T
 ---
 
 # Praca inżynierska
----
 
 ### Gabriel Wechta
 Wydział Podstawowych Problemów Techniki **Politechnika Wrocławska**
-
----
 
 **Temat pracy:** Wybrane aspekty bezpieczeństwa komputerowego z wykorzystaniem komputerów SBC.
 
